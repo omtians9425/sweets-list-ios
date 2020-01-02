@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UISearchBarDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -17,7 +17,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchText.delegate = self
         searchText.placeholder = "お菓子の名前を入力してください"
     }
-
+    
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,6 +28,16 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print(searchWord)
             searchSweets(keyword: searchWord)
         }
+    }
+    
+    struct Sweet: Codable {
+        let name: String?
+        let maker: String?
+        let url: URL?
+        let image: URL?
+    }
+    struct ResultJson: Codable {
+        let item: [Sweet]
     }
     
     func searchSweets(keyword: String) {
