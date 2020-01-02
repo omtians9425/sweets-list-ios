@@ -49,6 +49,25 @@ class ViewController: UIViewController, UISearchBarDelegate {
             return
         }
         print(req_url)
+        
+        // request obejct
+        let req = URLRequest(url: req_url)
+        // create session. OperationQueue.main means delegation method or closure is called on main thread.
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        
+        // add task( = request) for session
+        let task = session.dataTask(with: req, completionHandler: { (data, response, error) in
+            session.finishTasksAndInvalidate() // end session
+            
+            do {
+                let decoder = JSONDecoder()
+                let json = try decoder.decode(ResultJson.self, from: data!)
+                print(json)
+            } catch {
+                print("error")
+            }
+        })
+        task.resume() // start
     }
     
 }
