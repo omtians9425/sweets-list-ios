@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  SweetsList
 //
-//  Created by 小俣幸之助 on 2020/01/02.
+//  Created by omtians0425 on 2020/01/02.
 //  Copyright © 2020 Konosuke-o. All rights reserved.
 //
 
