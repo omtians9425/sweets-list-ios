@@ -21,6 +21,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    // tuple
+    var sweetList: [(name: String, maker: String, link: URL, image: URL)] = []
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
         
@@ -62,7 +65,20 @@ class ViewController: UIViewController, UISearchBarDelegate {
             do {
                 let decoder = JSONDecoder()
                 let json = try decoder.decode(ResultJson.self, from: data!)
-                print(json)
+                
+                
+                let items = json.item
+                for item in items {
+                    if let name = item.name, let maker = item.maker, let link = item.url, let image = item.image {
+                        let sweet = (name, maker, link, image)
+                        self.sweetList.append(sweet)
+                    }
+                }
+                if let sweetdbg = self.sweetList.first {
+                    print("----------------")
+                    print("list[0] = \(sweetdbg)")
+                }
+                
             } catch {
                 print("error")
             }
